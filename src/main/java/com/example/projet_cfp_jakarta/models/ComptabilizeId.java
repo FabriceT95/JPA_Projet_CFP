@@ -16,6 +16,11 @@ public class ComptabilizeId implements Serializable {
 
     }
 
+    public ComptabilizeId(Long factureId, Long produitId) {
+        this.factureId = factureId;
+        this.produitId = produitId;
+    }
+
     public Long getFactureId() {
         return factureId;
     }

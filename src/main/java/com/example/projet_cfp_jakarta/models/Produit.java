@@ -15,15 +15,21 @@ public class Produit {
     private Long idProduit;
 
     @Basic
+    @Column(nullable = false)
+    private String name;
+
+    @Basic
     private String description;
 
-    @Basic
-    @Column(nullable = false)
-    private float priceHT;
+
 
     @Basic
     @Column(nullable = false)
-    private float percentageTVA;
+    private double priceHT;
+
+    @Basic
+    @Column(nullable = false)
+    private double percentageTVA;
 
     @OneToMany(mappedBy = "produit", cascade = CascadeType.ALL)
     private List<Comptabilize> items = new ArrayList<>();
@@ -32,14 +38,16 @@ public class Produit {
 
     }
 
-    public Produit(Long idProduit, String description, float priceHT, float percentageTVA) {
+    public Produit(Long idProduit, String name, String description, double priceHT, double percentageTVA) {
         this.idProduit = idProduit;
+        this.name = name;
         this.description = description;
         this.priceHT = priceHT;
         this.percentageTVA = percentageTVA;
     }
 
-    public Produit(String description, float priceHT, float percentageTVA) {
+    public Produit(String name, String description, double priceHT, double percentageTVA) {
+        this.name = name;
         this.description = description;
         this.priceHT = priceHT;
         this.percentageTVA = percentageTVA;
@@ -53,6 +61,14 @@ public class Produit {
         this.idProduit = idProduit;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getDescription() {
         return description;
     }
@@ -61,19 +77,24 @@ public class Produit {
         this.description = description;
     }
 
-    public float getPriceHT() {
+    public double getPriceHT() {
         return priceHT;
     }
 
-    public void setPriceHT(float priceHT) {
+    public void setPriceHT(double priceHT) {
         this.priceHT = priceHT;
     }
 
-    public float getPercentageTVA() {
+    public double getPercentageTVA() {
         return percentageTVA;
     }
 
-    public void setPercentageTVA(float percentageTVA) {
+    public void setPercentageTVA(double percentageTVA) {
         this.percentageTVA = percentageTVA;
     }
+
+    public void addItem(Comptabilize c) {
+        this.items.add(c);
+    }
+
 }

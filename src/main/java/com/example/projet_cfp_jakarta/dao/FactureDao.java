@@ -37,7 +37,7 @@ public class FactureDao implements Dao<Facture> {
         EntityTransaction et = em.getTransaction();
         try {
             et.begin();
-            em.persist(facture);
+            em.merge(facture);
             et.commit();
         } catch (Exception e) {
             e.printStackTrace();

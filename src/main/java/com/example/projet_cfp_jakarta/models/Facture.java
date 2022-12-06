@@ -3,6 +3,7 @@ package com.example.projet_cfp_jakarta.models;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,15 +17,15 @@ public class Facture {
 
     @Basic
     @Column(nullable = false)
-    private Timestamp createdAt;
+    private LocalDate createdAt;
 
     @Basic
     @Column(nullable = false)
-    private float priceHT;
+    private double priceHT;
 
     @Basic
     @Column(nullable = false)
-    private float priceTTC;
+    private double priceTTC;
 
     @ManyToOne
     @JoinColumn(name = "idClient", referencedColumnName = "idClient",nullable = false)
@@ -33,7 +34,7 @@ public class Facture {
     @OneToMany(mappedBy = "facture", cascade = CascadeType.ALL)
     private List<Comptabilize> items = new ArrayList<>();
 
-    public Facture(Long idFacture, Timestamp createdAt, float priceHT, float priceTTC, Client client) {
+    public Facture(Long idFacture, LocalDate createdAt, double priceHT, double priceTTC, Client client) {
         this.idFacture = idFacture;
         this.createdAt = createdAt;
         this.priceHT = priceHT;
@@ -41,7 +42,7 @@ public class Facture {
         this.client = client;
     }
 
-    public Facture(Timestamp createdAt, float priceHT, float priceTTC, Client client) {
+    public Facture(LocalDate createdAt, double priceHT, double priceTTC, Client client) {
         this.createdAt = createdAt;
         this.priceHT = priceHT;
         this.priceTTC = priceTTC;
@@ -60,27 +61,27 @@ public class Facture {
         this.idFacture = idFacture;
     }
 
-    public Timestamp getCreatedAt() {
+    public LocalDate getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Timestamp createdAt) {
+    public void setCreatedAt(LocalDate createdAt) {
         this.createdAt = createdAt;
     }
 
-    public float getPriceHT() {
+    public double getPriceHT() {
         return priceHT;
     }
 
-    public void setPriceHT(float priceHT) {
+    public void setPriceHT(double priceHT) {
         this.priceHT = priceHT;
     }
 
-    public float getPriceTTC() {
+    public double getPriceTTC() {
         return priceTTC;
     }
 
-    public void setPriceTTC(float priceTTC) {
+    public void setPriceTTC(double priceTTC) {
         this.priceTTC = priceTTC;
     }
 
@@ -90,5 +91,11 @@ public class Facture {
 
     public void setClient(Client client) {
         this.client = client;
+    }
+
+    public void addItem(Produit p, int quantity) {
+        Comptabilize c = new Comptabilize(this, p,quantity);
+        items.add(c);
+        p.addItem(c);
     }
 }

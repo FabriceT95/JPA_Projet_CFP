@@ -22,6 +22,17 @@ public class Comptabilize {
     @Column(nullable = false)
     private int quantity;
 
+    public Comptabilize() {
+
+    }
+
+    public Comptabilize(Facture facture, Produit produit, int quantity) {
+        this.facture = facture;
+        this.produit = produit;
+        this.quantity = quantity;
+        this.id = new ComptabilizeId(facture.getIdFacture(), produit.getIdProduit());
+    }
+
     public int getQuantity() {
         return quantity;
     }
@@ -44,5 +55,13 @@ public class Comptabilize {
 
     public void setProduit(Produit produit) {
         this.produit = produit;
+    }
+
+    public ComptabilizeId getId() {
+        return id;
+    }
+
+    public void setId(ComptabilizeId id) {
+        this.id = id;
     }
 }

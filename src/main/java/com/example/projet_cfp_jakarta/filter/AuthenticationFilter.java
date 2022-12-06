@@ -1,6 +1,6 @@
-package com.example.demo_jakartaee.filter;
+package com.example.projet_cfp_jakarta.filter;
 
-import com.example.demo_jakartaee.servlet.LoginServlet;
+import com.example.projet_cfp_jakarta.servlet.LoginServlet;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
@@ -9,7 +9,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-@WebFilter(urlPatterns = {"/app/*", "/logout"})
+// @WebFilter(urlPatterns = {"/app/*", "/logout"})
 public class AuthenticationFilter implements Filter {
 
     @Override

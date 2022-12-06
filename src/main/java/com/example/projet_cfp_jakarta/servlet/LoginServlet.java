@@ -14,6 +14,8 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("GET LOGIN PAGE");
+
         req.getRequestDispatcher("/WEB-INF/login.jsp")
                 .forward(req, resp);
     }
@@ -34,7 +36,7 @@ public class LoginServlet extends HttpServlet {
             Cookie cookieU = new Cookie("username", username);
             resp.addCookie(cookieU);
 
-        //    resp.sendRedirect(GameListServlet.URL);
+            resp.sendRedirect("/app/clients");
         } else {
             req.setAttribute("loginFail", true);
             doGet(req, resp);
