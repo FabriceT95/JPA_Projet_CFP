@@ -11,27 +11,27 @@ public class Comptabilize {
     private ComptabilizeId id;
 
     @ManyToOne
-    @MapsId("idFacture")
+    @JoinColumn(name = "fk_facture")
+    @MapsId("factureId")
     private Facture facture;
 
     @ManyToOne
-    @MapsId("idProduit")
+    @JoinColumn(name = "fk_produit")
+    @MapsId("produitId")
     private Produit produit;
 
     @Basic
     @Column(nullable = false)
     private int quantity;
 
-    public Comptabilize() {
-
-    }
-
-    public Comptabilize(Facture facture, Produit produit, int quantity) {
+   /* public Comptabilize(Facture facture, Produit produit, int quantity) {
         this.facture = facture;
         this.produit = produit;
         this.quantity = quantity;
+        System.out.println(this.facture);
+        System.out.println(this.produit);
         this.id = new ComptabilizeId(facture.getIdFacture(), produit.getIdProduit());
-    }
+    }*/
 
     public int getQuantity() {
         return quantity;
@@ -63,5 +63,13 @@ public class Comptabilize {
 
     public void setId(ComptabilizeId id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "Comptabilize{" +
+                "id=" + id +
+                ", quantity=" + quantity +
+                '}';
     }
 }

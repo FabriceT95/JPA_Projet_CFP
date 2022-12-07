@@ -2,6 +2,9 @@ package com.example.projet_cfp_jakarta.dao;
 
 
 import com.example.projet_cfp_jakarta.models.Comptabilize;
+import com.example.projet_cfp_jakarta.models.ComptabilizeId;
+import com.example.projet_cfp_jakarta.models.Facture;
+import com.example.projet_cfp_jakarta.models.Produit;
 import com.example.projet_cfp_jakarta.utils.PersistenceManager;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -29,7 +32,14 @@ public class ComptabilizeDao implements Dao<Comptabilize> {
         EntityTransaction et = em.getTransaction();
         try {
             et.begin();
-            em.merge(comptabilize);
+            Facture f = em.find(Facture.class, comptabilize.getFacture().getIdFacture());
+            Produit p = em.find(Produit.class, comptabilize.getProduit().getIdProduit());
+            Comptabilize c = new Comptabilize();
+            c.setId(new ComptabilizeId(f.getIdFacture(), p.getIdProduit()));
+            c.setFacture(f);
+            c.setProduit(p);
+            c.setQuantity(comptabilize.getQuantity());
+            em.persist(c);
             et.commit();
         } catch (Exception e) {
             e.printStackTrace();

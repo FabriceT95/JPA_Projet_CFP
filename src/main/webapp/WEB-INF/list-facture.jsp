@@ -22,7 +22,7 @@
             <button type="submit">Delete</button>
         </form>
 
-        <button><a href="${pageContext.request.contextPath}/facture/details?id=${facture.idFacture}">Détails</a></button>
+        <button><a href="${pageContext.request.contextPath}/app/factures/details?id=${facture.idFacture}">Détails</a></button>
             <%--        <button><a href="${pageContext.request.contextPath}/games/details?id=${game.id}" >Details</a></button>--%>
     </div>
 </c:forEach>

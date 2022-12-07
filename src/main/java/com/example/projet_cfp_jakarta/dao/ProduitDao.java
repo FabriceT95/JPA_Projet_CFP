@@ -17,7 +17,9 @@ public class ProduitDao implements Dao<Produit> {
     public Optional<Produit> get(Long id) {
         EntityManagerFactory emf = PersistenceManager.getEntityManagerFactory();
         EntityManager em = emf.createEntityManager();
-        return Optional.of(em.find(Produit.class, id));
+        Optional<Produit> produit = Optional.of(em.find(Produit.class, id));
+        em.close();
+        return produit;
 
     }
 
@@ -59,7 +61,11 @@ public class ProduitDao implements Dao<Produit> {
         try {
             et.begin();
             Produit produitToUpdate = Optional.of(em.find(Produit.class, produit.getIdProduit())).get();
-            // factureToUpdate.setName(client.getName());
+            produitToUpdate.setName(produit.getName());
+            produitToUpdate.setDescription(produit.getDescription());
+            produitToUpdate.setPercentageTVA(produit.getPercentageTVA());
+            produitToUpdate.setPriceHT(produit.getPriceHT());
+            produitToUpdate.setItems(produit.getItems());
             em.persist(produitToUpdate);
             et.commit();
         } catch (Exception e) {

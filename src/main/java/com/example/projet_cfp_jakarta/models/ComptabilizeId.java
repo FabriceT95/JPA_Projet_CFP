@@ -6,10 +6,10 @@ import java.io.Serializable;
 
 public class ComptabilizeId implements Serializable {
 
-    @Column(name="factureId")
+    private static final long serialVersionUID = -3287715633608041039L;
+
     private Long factureId;
 
-    @Column(name="produitId")
     private Long produitId;
 
     public ComptabilizeId() {
@@ -35,5 +35,13 @@ public class ComptabilizeId implements Serializable {
 
     public void setProduitId(Long produitId) {
         this.produitId = produitId;
+    }
+
+    @Override
+    public String toString() {
+        return "ComptabilizeId{" +
+                "factureId=" + factureId +
+                ", produitId=" + produitId +
+                '}';
     }
 }

@@ -3,6 +3,7 @@ package com.example.projet_cfp_jakarta.models;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -37,8 +38,8 @@ public class Client {
     @Column(nullable = false)
     private String email;
 
-    @OneToMany(targetEntity = Facture.class, mappedBy = "client", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
-    List<Facture> factureList = new ArrayList<>();
+    @OneToMany(fetch =FetchType.EAGER,targetEntity = Facture.class, mappedBy = "client", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    Collection<Facture> factureList = new ArrayList<>();
 
     public Client() {}
 
@@ -117,11 +118,25 @@ public class Client {
         this.email = email;
     }
 
-    public List<Facture> getFactureList() {
+    public Collection<Facture> getFactureList() {
         return factureList;
     }
 
     public void addFacture(Facture f) {
         this.factureList.add(f);
     }
+
+   /* @Override
+    public String toString() {
+        return "Client{" +
+                "idClient=" + idClient +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", postalCode='" + postalCode + '\'' +
+                ", city='" + city + '\'' +
+                ", phoneNumber=" + phoneNumber +
+                ", email='" + email + '\'' +
+                ", factureList=" + factureList +
+                '}';
+    }*/
 }

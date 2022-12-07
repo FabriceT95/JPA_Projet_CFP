@@ -20,9 +20,8 @@ public class DetailsFactureServlet extends HttpServlet {
 
         FactureDao factureDao = new FactureDao();
         Optional<Facture> facture = factureDao.get(Long.valueOf(id));
-
-
-
+        req.setAttribute("facture", facture.get());
+        req.getRequestDispatcher(req.getContextPath() + "/WEB-INF/details-facture.jsp").forward(req, resp);
 
     }
 

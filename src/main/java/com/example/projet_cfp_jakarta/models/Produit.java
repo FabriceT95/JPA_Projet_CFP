@@ -4,6 +4,7 @@ package com.example.projet_cfp_jakarta.models;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -31,7 +32,7 @@ public class Produit {
     @Column(nullable = false)
     private double percentageTVA;
 
-    @OneToMany(mappedBy = "produit", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "produit", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Comptabilize> items = new ArrayList<>();
 
     public Produit() {
@@ -93,8 +94,23 @@ public class Produit {
         this.percentageTVA = percentageTVA;
     }
 
-    public void addItem(Comptabilize c) {
-        this.items.add(c);
+    public List<Comptabilize> getItems() {
+        return items;
     }
 
+    public void setItems(List<Comptabilize> items) {
+        this.items = items;
+    }
+
+    @Override
+    public String toString() {
+        return "Produit{" +
+                "idProduit=" + idProduit +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", priceHT=" + priceHT +
+                ", percentageTVA=" + percentageTVA +
+                ", items=" + items +
+                '}';
+    }
 }

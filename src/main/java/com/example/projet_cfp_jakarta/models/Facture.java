@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -31,7 +32,7 @@ public class Facture {
     @JoinColumn(name = "idClient", referencedColumnName = "idClient",nullable = false)
     private Client client;
 
-    @OneToMany(mappedBy = "facture", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "facture", cascade = CascadeType.ALL /*, fetch = FetchType.EAGER*/)
     private List<Comptabilize> items = new ArrayList<>();
 
     public Facture(Long idFacture, LocalDate createdAt, double priceHT, double priceTTC, Client client) {
@@ -93,9 +94,23 @@ public class Facture {
         this.client = client;
     }
 
-    public void addItem(Produit p, int quantity) {
-        Comptabilize c = new Comptabilize(this, p,quantity);
-        items.add(c);
-        p.addItem(c);
+    public List<Comptabilize> getItems() {
+        return items;
     }
+
+    public void setItems(List<Comptabilize> items) {
+        this.items = items;
+    }
+
+   /* @Override
+    public String toString() {
+        return "Facture{" +
+                "idFacture=" + idFacture +
+                ", createdAt=" + createdAt +
+                ", priceHT=" + priceHT +
+                ", priceTTC=" + priceTTC +
+                ", client=" + client +
+                ", items=" + items +
+                '}';
+    }*/
 }
