@@ -9,7 +9,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-// @WebFilter(urlPatterns = {"/app/*", "/logout"})
+@WebFilter(urlPatterns = {"/app/*", "/logout"})
 public class AuthenticationFilter implements Filter {
 
     @Override

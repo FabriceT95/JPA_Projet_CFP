@@ -23,10 +23,10 @@
             <button type="submit">Delete</button>
         </form>
 
-        <form method="get" action="${pageContext.request.contextPath}/games/add">
-            <input name="idUpdate" type="hidden"  value="${client.idClient}" />
-            <button type="submit">Update</button>
-        </form>
+<%--        <form method="get" action="${pageContext.request.contextPath}/games/add">--%>
+<%--            <input name="idUpdate" type="hidden"  value="${client.idClient}" />--%>
+<%--            <button type="submit">Update</button>--%>
+<%--        </form>--%>
 <%--        <button><a href="${pageContext.request.contextPath}/games/details?id=${game.id}" >Details</a></button>--%>
     </div>
 </c:forEach>
