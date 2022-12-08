@@ -17,7 +17,6 @@ public class FactureDao implements Dao<Facture> {
     public Optional<Facture> get(Long id) {
         EntityManagerFactory emf = PersistenceManager.getEntityManagerFactory();
         EntityManager em = emf.createEntityManager();
-       // Optional<Facture> facture = Optional.of(em.find(Facture.class, id));
         Facture facture = null;
         try {
             TypedQuery<Facture> query = em.createQuery("select f from Facture f left join fetch f.items WHERE f.idFacture=:id", Facture.class);

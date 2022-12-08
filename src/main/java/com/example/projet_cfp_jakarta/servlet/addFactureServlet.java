@@ -107,7 +107,7 @@ public class addFactureServlet extends HttpServlet {
 
         }
 
-        factureDao.update(f);
+       // factureDao.update(f);
 
 
 
